@@ -86,10 +86,10 @@ Otra forma de escribir esto es usando la técnica funcional de **currying**, que
 
 ```scala
 val segundoMultiplicador = (multiplicador _).curried
-// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$4958/1084648189@596aca9c
+// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$4958/1084648189@622eb1c9
 
 val cuatriplicador = segundoMultiplicador(4)
-// cuatriplicador: Int => Int = scala.Function2$$Lambda$4959/851413957@4ddeb0fd
+// cuatriplicador: Int => Int = scala.Function2$$Lambda$4959/851413957@501725a3
 
 cuatriplicador(11)
 // res5: Int = 44
@@ -106,3 +106,121 @@ cuentaNumArgumentos(1, 2, 3, 4, 5)
 // res6: Int = 5
 ```
 
+## Clases
+
+Una clase que puede contener variables, valores y métodos (funciones con acceso al estado de la clase):
+
+```scala
+class Calculadora {
+    val marca: String = "HP"
+    def suma(a: Int, b: Int): Int = a + b
+}
+```
+
+Para crear objetos de la clase se usa la palabra reservada `new`:
+
+```scala
+val miHp = new Calculadora
+// miHp: Calculadora = repl.Session$App$Calculadora@ef21383
+
+miHp.marca
+// res7: String = "HP"
+
+miHp.suma(20, 22)
+// res8: Int = 42
+```
+
+### Constructor
+
+El constructor no es un método especial, es el código fuera de los métodos de la clase:
+
+```scala
+class CalculadoraColor(marca: String) {
+    /* Constructor */
+    val color = if (marca == "HP") "negro" else "gris"
+
+    // Método para las instancias
+    def suma(a: Int, b: Int): Int = a + b
+}
+
+val miCalculadoraColor = new CalculadoraColor("HP")
+// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@7dc08876
+
+miCalculadoraColor.color
+// res9: String = "negro"
+
+miCalculadoraColor.suma(12, 30)
+// res10: Int = 42
+```
+
+Resaltar como se define el color de la clase con una expresión *if-else*.
+
+### Herencia
+
+Para definir una subclase se utiliza la palabra reservada `extends`:
+
+```scala
+class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
+    def log(m: Double, base: Double) = math.log(m) / math.log(base)
+}
+
+val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
+// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@6a77defe
+
+miCalculadoraCiencia.suma(5, 37)
+// res11: Int = 42
+
+miCalculadoraCiencia.log(64, 2)
+// res12: Double = 6.0
+```
+
+También se pueden **sobrecargar métodos** con el mismo nombre pero distintos parámetros:
+
+```scala
+class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(marca) {
+    def log(m: Double): Double = log(m, 10)
+}
+
+val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
+// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@3a4d42e
+
+otraCalculadoraCiencia.log(100)
+// res13: Double = 2.0
+```
+
+### Clases abstractas
+
+Las clases abstractas puede definir métodos sin implementación, que serán especificados en sus subclases.
+
+```scala
+abstract class Forma {
+    def getArea(): Int
+}
+
+class Circulo(radio: Int) extends Forma {
+    override def getArea(): Int = radio * radio * 3
+}
+
+val unCirculo = new Circulo(2)
+// unCirculo: Circulo = repl.Session$App$Circulo@1d54a1d2
+
+unCirculo.getArea()
+// res14: Int = 12
+```
+
+Señalar que las clases abstractas no se pueden instanciar, es decir no se pueden crear objetos de una clase abstracta.
+
+```scala
+val forma = new Forma
+// error: class Forma is abstract; cannot be instantiated
+// val forma = new Forma
+//             ^^^^^^^^^
+```
+
+## Traits
+
+...
+
+## Tipos
+
+...

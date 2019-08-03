@@ -84,3 +84,97 @@ def cuentaNumArgumentos(argumentos: Int*): Int = argumentos.size
 
 cuentaNumArgumentos(1, 2, 3, 4, 5)
 ```
+
+## Clases
+
+Una clase que puede contener variables, valores y métodos (funciones con acceso al estado de la clase):
+```scala mdoc
+class Calculadora {
+    val marca: String = "HP"
+    def suma(a: Int, b: Int): Int = a + b
+}
+```
+
+Para crear objetos de la clase se usa la palabra reservada `new`:
+```scala mdoc
+val miHp = new Calculadora
+
+miHp.marca
+
+miHp.suma(20, 22)
+```
+
+### Constructor
+
+El constructor no es un método especial, es el código fuera de los métodos de la clase:
+```scala mdoc
+class CalculadoraColor(marca: String) {
+    /* Constructor */
+    val color = if (marca == "HP") "negro" else "gris"
+
+    // Método para las instancias
+    def suma(a: Int, b: Int): Int = a + b
+}
+
+val miCalculadoraColor = new CalculadoraColor("HP")
+
+miCalculadoraColor.color
+
+miCalculadoraColor.suma(12, 30)
+```
+
+Resaltar como se define el color de la clase con una expresión *if-else*.
+
+### Herencia
+Para definir una subclase se utiliza la palabra reservada `extends`:
+```scala mdoc
+class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
+    def log(m: Double, base: Double) = math.log(m) / math.log(base)
+}
+
+val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
+
+miCalculadoraCiencia.suma(5, 37)
+
+miCalculadoraCiencia.log(64, 2)
+```
+
+También se pueden **sobrecargar métodos** con el mismo nombre pero distintos parámetros:
+```scala mdoc
+class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(marca) {
+    def log(m: Double): Double = log(m, 10)
+}
+
+val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
+
+otraCalculadoraCiencia.log(100)
+```
+
+### Clases abstractas
+Las clases abstractas puede definir métodos sin implementación, que serán especificados en sus subclases.
+
+```scala mdoc
+abstract class Forma {
+    def getArea(): Int
+}
+
+class Circulo(radio: Int) extends Forma {
+    override def getArea(): Int = radio * radio * 3
+}
+
+val unCirculo = new Circulo(2)
+
+unCirculo.getArea()
+```
+
+Señalar que las clases abstractas no se pueden instanciar, es decir no se pueden crear objetos de una clase abstracta.
+
+```scala mdoc:fail
+val forma = new Forma
+```
+
+## Traits
+...
+
+## Tipos
+...
