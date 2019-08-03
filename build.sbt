@@ -12,5 +12,8 @@ lazy val root = (project in file("."))
   )
 
 lazy val docs = (project.in(file("intro-docs")))
+  .settings(
+    mdocOut := new java.io.File("output")
+  )
   .dependsOn(root)
   .enablePlugins(MdocPlugin)
