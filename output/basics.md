@@ -86,10 +86,10 @@ Otra forma de escribir esto es usando la técnica funcional de **currying**, que
 
 ```scala
 val segundoMultiplicador = (multiplicador _).curried
-// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$4958/1084648189@622eb1c9
+// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6270/992433993@736defb2
 
 val cuatriplicador = segundoMultiplicador(4)
-// cuatriplicador: Int => Int = scala.Function2$$Lambda$4959/851413957@501725a3
+// cuatriplicador: Int => Int = scala.Function2$$Lambda$6271/8797675@be8835
 
 cuatriplicador(11)
 // res5: Int = 44
@@ -121,7 +121,7 @@ Para crear objetos de la clase se usa la palabra reservada `new`:
 
 ```scala
 val miHp = new Calculadora
-// miHp: Calculadora = repl.Session$App$Calculadora@ef21383
+// miHp: Calculadora = repl.Session$App$Calculadora@3c5623f9
 
 miHp.marca
 // res7: String = "HP"
@@ -132,7 +132,7 @@ miHp.suma(20, 22)
 
 ### Constructor
 
-El constructor no es un método especial, es el código fuera de los métodos de la clase:
+El constructor no es un método especial, al crear una instancia se ejecuta el código fuera de los métodos de la clase. Los parámetros del constructor se especifican junto al nombre de la clase:
 
 ```scala
 class CalculadoraColor(marca: String) {
@@ -144,7 +144,7 @@ class CalculadoraColor(marca: String) {
 }
 
 val miCalculadoraColor = new CalculadoraColor("HP")
-// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@7dc08876
+// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@515f20ed
 
 miCalculadoraColor.color
 // res9: String = "negro"
@@ -165,7 +165,7 @@ class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
 }
 
 val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
-// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@6a77defe
+// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@4dd3550b
 
 miCalculadoraCiencia.suma(5, 37)
 // res11: Int = 42
@@ -173,6 +173,8 @@ miCalculadoraCiencia.suma(5, 37)
 miCalculadoraCiencia.log(64, 2)
 // res12: Double = 6.0
 ```
+
+Una clase solo puede extender de una superclase.
 
 También se pueden **sobrecargar métodos** con el mismo nombre pero distintos parámetros:
 
@@ -182,7 +184,7 @@ class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(mar
 }
 
 val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
-// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@3a4d42e
+// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@395883a4
 
 otraCalculadoraCiencia.log(100)
 // res13: Double = 2.0
@@ -202,7 +204,7 @@ class Circulo(radio: Int) extends Forma {
 }
 
 val unCirculo = new Circulo(2)
-// unCirculo: Circulo = repl.Session$App$Circulo@1d54a1d2
+// unCirculo: Circulo = repl.Session$App$Circulo@349c269d
 
 unCirculo.getArea()
 // res14: Int = 12
@@ -219,8 +221,44 @@ val forma = new Forma
 
 ## Traits
 
-...
+Un *trait* es una colección de campos y métodos que puedes extender o mezclar con tus clases.
+
+```scala
+trait Vehiculo {
+    val marca: String
+}
+
+class Coche extends Vehiculo {
+    val marca = "Seat"
+}
+```
+
+Una clase puede extender más de un *trait* usando la palabra reservada `with`:
+
+```scala
+trait Remolque {
+    val cargaMaxima: Double
+
+    def remolcar(carga: Double): Unit = {
+        assert(carga < cargaMaxima, "No puedo remolcar esa carga")
+    }
+}
+
+class Pickup extends Vehiculo with Remolque {
+    val marca = "Toyota"
+    val cargaMaxima = 3500
+}
+```
+
+### ¿Cuándo usar una clase abstracta o un *trait*?
+
+Intenta utilizar *trait*s en primer lugar ya que son más versátiles, una clase puede extender varios traits, a diferencia de las clase abstractas.
+
+Por otra parte los *trait* no tiene parámetros constructores, así que en caso de necesitarlos debes optar por una clase abstracta.
 
 ## Tipos
 
-...
+En scala todos los valores son objetos (incluyendo valores numéricos y funciones) y dado que scala está basado en clases, todos los valores son instancias de una clase. El siguiente diagrama ilustra esta jerarquía de clases:
+
+![jerarquía de clases](https://docs.scala-lang.org/resources/images/classhierarchy.img_assist_custom.png "Jerarquía de clases en scala")
+

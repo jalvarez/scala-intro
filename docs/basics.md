@@ -106,7 +106,7 @@ miHp.suma(20, 22)
 
 ### Constructor
 
-El constructor no es un método especial, es el código fuera de los métodos de la clase:
+El constructor no es un método especial, al crear una instancia se ejecuta el código fuera de los métodos de la clase. Los parámetros del constructor se especifican junto al nombre de la clase:
 ```scala mdoc
 class CalculadoraColor(marca: String) {
     /* Constructor */
@@ -138,6 +138,8 @@ miCalculadoraCiencia.suma(5, 37)
 
 miCalculadoraCiencia.log(64, 2)
 ```
+
+Una clase solo puede extender de una superclase.
 
 También se pueden **sobrecargar métodos** con el mismo nombre pero distintos parámetros:
 ```scala mdoc
@@ -174,7 +176,44 @@ val forma = new Forma
 ```
 
 ## Traits
-...
+
+Un *trait* es una colección de campos y métodos que puedes extender o mezclar con tus clases.
+
+```scala mdoc
+trait Vehiculo {
+    val marca: String
+}
+
+class Coche extends Vehiculo {
+    val marca = "Seat"
+}
+```
+
+Una clase puede extender más de un *trait* usando la palabra reservada `with`:
+
+```scala mdoc
+trait Remolque {
+    val cargaMaxima: Double
+
+    def remolcar(carga: Double): Unit = {
+        assert(carga < cargaMaxima, "No puedo remolcar esa carga")
+    }
+}
+
+class Pickup extends Vehiculo with Remolque {
+    val marca = "Toyota"
+    val cargaMaxima = 3500
+}
+```
+
+### ¿Cuándo usar una clase abstracta o un *trait*?
+
+Intenta utilizar *trait*s en primer lugar ya que son más versátiles, una clase puede extender varios traits, a diferencia de las clase abstractas.
+
+Por otra parte los *trait* no tiene parámetros constructores, así que en caso de necesitarlos debes optar por una clase abstracta.
 
 ## Tipos
-...
+En scala todos los valores son objetos (incluyendo valores numéricos y funciones) y dado que scala está basado en clases, todos los valores son instancias de una clase. El siguiente diagrama ilustra esta jerarquía de clases:
+
+![jerarquía de clases](https://docs.scala-lang.org/resources/images/classhierarchy.img_assist_custom.png "Jerarquía de clases en scala")
+
