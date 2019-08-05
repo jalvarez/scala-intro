@@ -86,10 +86,10 @@ Otra forma de escribir esto es usando la técnica funcional de **currying**, que
 
 ```scala
 val segundoMultiplicador = (multiplicador _).curried
-// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6270/992433993@736defb2
+// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6292/1744811257@53d3def5
 
 val cuatriplicador = segundoMultiplicador(4)
-// cuatriplicador: Int => Int = scala.Function2$$Lambda$6271/8797675@be8835
+// cuatriplicador: Int => Int = scala.Function2$$Lambda$6293/1744508662@2896afad
 
 cuatriplicador(11)
 // res5: Int = 44
@@ -121,7 +121,7 @@ Para crear objetos de la clase se usa la palabra reservada `new`:
 
 ```scala
 val miHp = new Calculadora
-// miHp: Calculadora = repl.Session$App$Calculadora@3c5623f9
+// miHp: Calculadora = repl.Session$App$Calculadora@2f5e3ac9
 
 miHp.marca
 // res7: String = "HP"
@@ -144,7 +144,7 @@ class CalculadoraColor(marca: String) {
 }
 
 val miCalculadoraColor = new CalculadoraColor("HP")
-// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@515f20ed
+// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@61e6a9fa
 
 miCalculadoraColor.color
 // res9: String = "negro"
@@ -165,7 +165,7 @@ class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
 }
 
 val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
-// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@4dd3550b
+// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@2c0ff745
 
 miCalculadoraCiencia.suma(5, 37)
 // res11: Int = 42
@@ -184,7 +184,7 @@ class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(mar
 }
 
 val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
-// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@395883a4
+// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@31f9ceae
 
 otraCalculadoraCiencia.log(100)
 // res13: Double = 2.0
@@ -204,7 +204,7 @@ class Circulo(radio: Int) extends Forma {
 }
 
 val unCirculo = new Circulo(2)
-// unCirculo: Circulo = repl.Session$App$Circulo@349c269d
+// unCirculo: Circulo = repl.Session$App$Circulo@6faf222a
 
 unCirculo.getArea()
 // res14: Int = 12
@@ -262,3 +262,93 @@ En scala todos los valores son objetos (incluyendo valores numéricos y funcione
 
 ![jerarquía de clases](https://docs.scala-lang.org/resources/images/classhierarchy.img_assist_custom.png "Jerarquía de clases en scala")
 
+### Clases vs Tipos
+
+La **clase** de un objeto define como es implementado: su estado interno y como se realizan las operaciones.
+
+El **tipo** de un objeto solo se refiere al interfaz o conjunto de peticiones a las que puede responder un objeto.
+
+Un objeto puede tener varios tipos y objetos de diferentes clases pueden tener el mismo tipo.
+
+## Clases como funciones
+
+Como scala combina la programación orientada a objetos y la programación funcional, esto se refleja en los métodos *apply* de las clases y objetos, que se ejecutan al invocar una objeto como una función:
+
+```scala
+class Bar {
+    def apply(p: String): String = p + " bar"
+}
+
+val b = new Bar
+// b: Bar = repl.Session$App$Bar@3deb0dc8
+
+b("hola")
+// res16: String = "hola bar"
+```
+
+## Objetos
+
+Se pueden definir objetos con un única instancia, con la palabra reservada `object`:
+
+```scala
+object Contador {
+    var cuenta = 0
+
+    def siguiente(): Int = {
+        cuenta += 1
+        cuenta
+    }
+}
+
+Contador.cuenta
+// res17: Int = 0
+
+Contador.siguiente()
+// res18: Int = 1
+
+Contador.cuenta
+// res19: Int = 1
+```
+
+Cuando un objeto tiene el mismo nombre de una clase, en este caso se denomina objeto acompañante (*object companion*) y en el que se suelen incluir métodos y valores comunes a todos los objetos de una clase:
+
+```scala
+class Minion {
+    def saludo(): String = "Platano"
+}
+
+object Minion {
+    val color = "Amarillo"
+
+    def clonar(): Minion = new Minion
+}
+
+val kevin = Minion.clonar()
+// kevin: Minion = repl.Session$App$Minion@762b7da5
+
+kevin.saludo()
+// res20: String = "Platano"
+```
+
+### Funciones como objetos
+
+Siguiendo con la dualidad que ofrece scala entre la programación orientada a objetos y la programación funcional, se puede construir funciones como objetos:
+
+```scala
+object añadeUno extends Function1[Int, Int] {
+    def apply(m: Int): Int = m + 1
+}
+
+añadeUno(41)
+// res21: Int = 42
+```
+
+Donde `Function1[Int, Int]` es un sinónimo de `Int => Int`.
+
+## Paquetes
+
+...
+
+## Case class
+
+...

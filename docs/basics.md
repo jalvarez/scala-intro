@@ -217,3 +217,81 @@ En scala todos los valores son objetos (incluyendo valores numéricos y funcione
 
 ![jerarquía de clases](https://docs.scala-lang.org/resources/images/classhierarchy.img_assist_custom.png "Jerarquía de clases en scala")
 
+### Clases vs Tipos
+La **clase** de un objeto define como es implementado: su estado interno y como se realizan las operaciones.
+
+El **tipo** de un objeto solo se refiere al interfaz o conjunto de peticiones a las que puede responder un objeto.
+
+Un objeto puede tener varios tipos y objetos de diferentes clases pueden tener el mismo tipo.
+
+## Clases como funciones
+
+Como scala combina la programación orientada a objetos y la programación funcional, esto se refleja en los métodos *apply* de las clases y objetos, que se ejecutan al invocar una objeto como una función:
+
+```scala mdoc
+class Bar {
+    def apply(p: String): String = p + " bar"
+}
+
+val b = new Bar
+
+b("hola")
+```
+
+## Objetos
+
+Se pueden definir objetos con un única instancia, con la palabra reservada `object`:
+```scala mdoc
+object Contador {
+    var cuenta = 0
+
+    def siguiente(): Int = {
+        cuenta += 1
+        cuenta
+    }
+}
+
+Contador.cuenta
+
+Contador.siguiente()
+
+Contador.cuenta
+```
+
+Cuando un objeto tiene el mismo nombre de una clase, en este caso se denomina objeto acompañante (*object companion*) y en el que se suelen incluir métodos y valores comunes a todos los objetos de una clase:
+
+```scala mdoc
+class Minion {
+    def saludo(): String = "Platano"
+}
+
+object Minion {
+    val color = "Amarillo"
+
+    def clonar(): Minion = new Minion
+}
+
+val kevin = Minion.clonar()
+
+kevin.saludo()
+```
+
+### Funciones como objetos
+
+Siguiendo con la dualidad que ofrece scala entre la programación orientada a objetos y la programación funcional, se puede construir funciones como objetos:
+
+```scala mdoc
+object añadeUno extends Function1[Int, Int] {
+    def apply(m: Int): Int = m + 1
+}
+
+añadeUno(41)
+```
+
+Donde `Function1[Int, Int]` es un sinónimo de `Int => Int`.
+
+## Paquetes
+...
+
+## Case class
+...
