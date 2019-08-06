@@ -86,10 +86,10 @@ Otra forma de escribir esto es usando la técnica funcional de **currying**, que
 
 ```scala
 val segundoMultiplicador = (multiplicador _).curried
-// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6292/1744811257@53d3def5
+// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6317/1283300995@14edf323
 
 val cuatriplicador = segundoMultiplicador(4)
-// cuatriplicador: Int => Int = scala.Function2$$Lambda$6293/1744508662@2896afad
+// cuatriplicador: Int => Int = scala.Function2$$Lambda$6318/1154587771@6dc70008
 
 cuatriplicador(11)
 // res5: Int = 44
@@ -121,7 +121,7 @@ Para crear objetos de la clase se usa la palabra reservada `new`:
 
 ```scala
 val miHp = new Calculadora
-// miHp: Calculadora = repl.Session$App$Calculadora@2f5e3ac9
+// miHp: Calculadora = repl.Session$App$Calculadora@105c7e9d
 
 miHp.marca
 // res7: String = "HP"
@@ -144,7 +144,7 @@ class CalculadoraColor(marca: String) {
 }
 
 val miCalculadoraColor = new CalculadoraColor("HP")
-// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@61e6a9fa
+// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@28d1255f
 
 miCalculadoraColor.color
 // res9: String = "negro"
@@ -165,7 +165,7 @@ class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
 }
 
 val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
-// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@2c0ff745
+// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@535eaf8d
 
 miCalculadoraCiencia.suma(5, 37)
 // res11: Int = 42
@@ -184,7 +184,7 @@ class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(mar
 }
 
 val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
-// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@31f9ceae
+// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@6cc22ae
 
 otraCalculadoraCiencia.log(100)
 // res13: Double = 2.0
@@ -204,7 +204,7 @@ class Circulo(radio: Int) extends Forma {
 }
 
 val unCirculo = new Circulo(2)
-// unCirculo: Circulo = repl.Session$App$Circulo@6faf222a
+// unCirculo: Circulo = repl.Session$App$Circulo@75171c7c
 
 unCirculo.getArea()
 // res14: Int = 12
@@ -280,7 +280,7 @@ class Bar {
 }
 
 val b = new Bar
-// b: Bar = repl.Session$App$Bar@3deb0dc8
+// b: Bar = repl.Session$App$Bar@39af5ae0
 
 b("hola")
 // res16: String = "hola bar"
@@ -324,7 +324,7 @@ object Minion {
 }
 
 val kevin = Minion.clonar()
-// kevin: Minion = repl.Session$App$Minion@762b7da5
+// kevin: Minion = repl.Session$App$Minion@634221d2
 
 kevin.saludo()
 // res20: String = "Platano"
@@ -347,8 +347,39 @@ Donde `Function1[Int, Int]` es un sinónimo de `Int => Int`.
 
 ## Paquetes
 
-...
+Puede organizar las clases, objetos y traits en paquetes. En la primer línea de un fichero se especifica el paquete de todos los elementos que contiene con la palabra reservada `package`.
+
+Como los valores y funciones no se pueden definir fuera de una clase u objeto, se suelen usar objetos dentro de los paquetes para organizarlos:
+
+```scala
+package gitub.jalvarez.intro-scala
+
+object colores {
+    val azul = "blue"
+    val yellow = "amarillo"
+}
+```
 
 ## Case class
 
-...
+Las *case class* son un tipo particular de clases que incluyen automáticamente los métodos:
+* `toString` para representar la clase como una cadena de texto.
+* métodos que implementan la igualdad entre objetos.
+
+```scala
+case class Ordenador(marca: String, modelo: String)
+
+val primerMac = Ordenador("Apple", "iMac")
+// primerMac: Ordenador = Ordenador("Apple", "iMac")
+val segundoMac = Ordenador("Apple", "iMac")
+// segundoMac: Ordenador = Ordenador("Apple", "iMac")
+val pc = Ordenador("Dell", "MD12312")
+// pc: Ordenador = Ordenador("Dell", "MD12312")
+
+primerMac == pc
+// res22: Boolean = false
+primerMac == segundoMac
+// res23: Boolean = true
+```
+
+Nótese que para crear los objetos no se fue necesario usar la palabra reservada `new`.

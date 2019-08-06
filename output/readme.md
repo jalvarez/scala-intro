@@ -4,13 +4,14 @@ Resumen introductorio sobre el lenguaje scala. En el que se tratarán los siguie
 
 ## [Conceptos básicos](basics.md)
 
-Se abordan los elementos básicos del lenguaje como: valores, funciones, clases, herencia, excepciones, objectos y paquetes.
+Se abordan los elementos básicos del lenguaje como: valores, funciones, clases, herencia, excepciones, objetos, paquetes y *case class*es.
+
+## [*Pattern-matching* o reconocimiento de patrones](patternMatching.md)
+
+Potente mecanismo aporta legibilidad al código así como aprovecha la potencia del compilador respecto a la comprobación de tipos.
+
 
 ## Colecciones y combinadores funcionales
-
-...
-
-## *Pattern-matching*
 
 ...
 

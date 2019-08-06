@@ -291,7 +291,34 @@ añadeUno(41)
 Donde `Function1[Int, Int]` es un sinónimo de `Int => Int`.
 
 ## Paquetes
-...
+Puede organizar las clases, objetos y traits en paquetes. En la primer línea de un fichero se especifica el paquete de todos los elementos que contiene con la palabra reservada `package`.
+
+Como los valores y funciones no se pueden definir fuera de una clase u objeto, se suelen usar objetos dentro de los paquetes para organizarlos:
+
+```scala
+package gitub.jalvarez.intro-scala
+
+object colores {
+    val azul = "blue"
+    val yellow = "amarillo"
+}
+```
 
 ## Case class
-...
+
+Las *case class* son un tipo particular de clases que incluyen automáticamente los métodos:
+ * `toString` para representar la clase como una cadena de texto.
+ * métodos que implementan la igualdad entre objetos.
+
+```scala mdoc
+case class Ordenador(marca: String, modelo: String)
+
+val primerMac = Ordenador("Apple", "iMac")
+val segundoMac = Ordenador("Apple", "iMac")
+val pc = Ordenador("Dell", "MD12312")
+
+primerMac == pc
+primerMac == segundoMac
+```
+
+Nótese que para crear los objetos no se fue necesario usar la palabra reservada `new`.
