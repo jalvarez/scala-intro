@@ -86,10 +86,10 @@ Otra forma de escribir esto es usando la técnica funcional de **currying**, que
 
 ```scala
 val segundoMultiplicador = (multiplicador _).curried
-// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6317/1283300995@14edf323
+// segundoMultiplicador: Int => Int => Int = scala.Function2$$Lambda$6467/1785587894@2abf0343
 
 val cuatriplicador = segundoMultiplicador(4)
-// cuatriplicador: Int => Int = scala.Function2$$Lambda$6318/1154587771@6dc70008
+// cuatriplicador: Int => Int = scala.Function2$$Lambda$6468/1198995161@62896952
 
 cuatriplicador(11)
 // res5: Int = 44
@@ -121,7 +121,7 @@ Para crear objetos de la clase se usa la palabra reservada `new`:
 
 ```scala
 val miHp = new Calculadora
-// miHp: Calculadora = repl.Session$App$Calculadora@105c7e9d
+// miHp: Calculadora = repl.Session$App$Calculadora@764d11c4
 
 miHp.marca
 // res7: String = "HP"
@@ -144,7 +144,7 @@ class CalculadoraColor(marca: String) {
 }
 
 val miCalculadoraColor = new CalculadoraColor("HP")
-// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@28d1255f
+// miCalculadoraColor: CalculadoraColor = repl.Session$App$CalculadoraColor@7b91eb59
 
 miCalculadoraColor.color
 // res9: String = "negro"
@@ -165,7 +165,7 @@ class CalculadoraCientifica(marca: String) extends CalculadoraColor(marca) {
 }
 
 val miCalculadoraCiencia = new CalculadoraCientifica("Casio")
-// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@535eaf8d
+// miCalculadoraCiencia: CalculadoraCientifica = repl.Session$App$CalculadoraCientifica@698f3358
 
 miCalculadoraCiencia.suma(5, 37)
 // res11: Int = 42
@@ -184,7 +184,7 @@ class OtraCalculadoraCientifica(marca: String) extends CalculadoraCientifica(mar
 }
 
 val otraCalculadoraCiencia = new OtraCalculadoraCientifica("TI")
-// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@6cc22ae
+// otraCalculadoraCiencia: OtraCalculadoraCientifica = repl.Session$App$OtraCalculadoraCientifica@14e5cf25
 
 otraCalculadoraCiencia.log(100)
 // res13: Double = 2.0
@@ -204,7 +204,7 @@ class Circulo(radio: Int) extends Forma {
 }
 
 val unCirculo = new Circulo(2)
-// unCirculo: Circulo = repl.Session$App$Circulo@75171c7c
+// unCirculo: Circulo = repl.Session$App$Circulo@11040481
 
 unCirculo.getArea()
 // res14: Int = 12
@@ -280,7 +280,7 @@ class Bar {
 }
 
 val b = new Bar
-// b: Bar = repl.Session$App$Bar@39af5ae0
+// b: Bar = repl.Session$App$Bar@3f3514d4
 
 b("hola")
 // res16: String = "hola bar"
@@ -324,7 +324,7 @@ object Minion {
 }
 
 val kevin = Minion.clonar()
-// kevin: Minion = repl.Session$App$Minion@634221d2
+// kevin: Minion = repl.Session$App$Minion@3374ad75
 
 kevin.saludo()
 // res20: String = "Platano"
