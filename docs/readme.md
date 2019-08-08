@@ -8,9 +8,8 @@ Se abordan los elementos básicos del lenguaje como: valores, funciones, clases,
 ## [*Pattern-matching* o reconocimiento de patrones](patternMatching.md)
 Potente mecanismo aporta legibilidad al código así como aprovecha la potencia del compilador respecto a la comprobación de tipos.
 
-
-## Colecciones y combinadores funcionales
-...
+## [Colecciones y combinadores funcionales](collections.md)
+Se introducen las estructuras de datos básicas y los combinadores funcionales.
 
 ## Tipos y polimorfismo
 ...

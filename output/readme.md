@@ -10,10 +10,9 @@ Se abordan los elementos básicos del lenguaje como: valores, funciones, clases,
 
 Potente mecanismo aporta legibilidad al código así como aprovecha la potencia del compilador respecto a la comprobación de tipos.
 
+## [Colecciones y combinadores funcionales](collections.md)
 
-## Colecciones y combinadores funcionales
-
-...
+Se introducen las estructuras de datos básicas y los combinadores funcionales.
 
 ## Tipos y polimorfismo
 
