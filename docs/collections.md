@@ -103,3 +103,109 @@ sinValor.getOrElse(42)
 ```
 
 # Combinadores funcionales
+
+## ¿Qué es un combinador?
+Según la definición formal en lógica combinatoria es una *función o definición sin variables libres*. Quizás una definición más práctica fue dada por [John Hughes](https://en.wikipedia.org/wiki/John_Hughes_(computer_scientist)) del un combinador como una función que construye framgentos de código a partir de otros fragmentos.
+
+Vamos a ver alguno combinadores incluídos en *scala*:
+
+## *map*
+Evalúa una función para cada elemento de una colección:
+```scala mdoc
+def doblador(x: Int) = x * 2
+
+val numeros = List(1, 2, 3, 4, 5)
+
+numeros.map(doblador)
+```
+
+## *filter*
+Filtra los elementos de una colección según una función predicado (que devuelve un valor booleano):
+
+```scala mdoc
+def esPar(x: Int): Boolean = x % 2 == 0
+val numerosPares = numeros.filter(esPar)
+
+numerosPares
+```
+
+## *find*
+Devuelve el primer elemento (opcional) de la colección que cumple el predicado:
+```scala mdoc
+val primeroMayorQue3 = numeros.find((x: Int) => x > 2)
+
+primeroMayorQue3
+```
+
+## *partition*
+Divide una colección en dos siguiendo un predicado:
+```scala mdoc
+val (numPares, numImpares) = numeros.partition(esPar)
+
+numPares
+
+numImpares
+```
+
+## *zip*
+Combina como producto cartesiano el contenido de dos colecciones en una:
+```scala mdoc(
+val caracteres = List('a', 'b', 'c', 'd', 'e')
+
+caracteres.zip(numeros)
+```
+
+## *dropWhile*
+*Dropa* elementos de la colección mientras se cumpla el predicado:
+```scala mdoc
+val mayoresDe3 = numeros.dropWhile(_ <= 3)
+
+mayoresDe3
+```
+
+## *foldLeft*
+*Pliega* una colección sobre un elemento que actúa como acumulador:
+
+```scala mdoc
+val sumaNumeros = numeros.foldLeft(0)((acumulado: Int, elemento: Int) => acumulado + elemento) 
+
+sumaNumeros
+```
+
+Visualmente:
+```scala mdoc
+numeros.foldLeft(0)((acumulado: Int, elemento: Int) => {
+    println("acumulado: %d, elemento: %d".format(acumulado, elemento))
+    acumulado + elemento
+})
+```
+
+## *foldRight*
+Equivalente a *foldLeft* pero aplicando la función por la derecha:
+```scala mdoc
+numeros.foldRight(0)((acumulado: Int, elemento: Int) => {
+    println("acumulado: %d, elemento: %d".format(acumulado, elemento))
+    acumulado - elemento
+})
+```
+
+## *flatten*
+*Aplana* un nivel en una colección de colecciones:
+```scala mdoc
+val listaDeListas = List(List(1, 2), List(3, 4))
+listaDeListas.flatten
+```
+
+## *flatMap*
+Combina un el *mapping* con el *flatting*:
+```scala mdoc
+listaDeListas.flatMap(l => l.map(_ * 2))
+```
+
+## *foreach*
+Aplica una sentencia a cada elemento de la colección y no devuelve nada:
+```scala mdoc
+numeros.foreach { x =>
+    println(x)
+}
+```
