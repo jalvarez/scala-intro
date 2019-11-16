@@ -14,9 +14,9 @@ Potente mecanismo aporta legibilidad al código así como aprovecha la potencia 
 
 Se introducen las estructuras de datos básicas y los combinadores funcionales.
 
-## Tipos y polimorfismo
+## [Tipos y polimorfismo](types.md)
 
-...
+Scala es un lenguaje de tipado fuerte y estático, aquí introducimos conceptos como polimorfismo paramétrico.
 
 ## ¿Cómo se hizo esta introducción?
 
